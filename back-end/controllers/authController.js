@@ -168,7 +168,7 @@ const update_user_profile = async (req, res) => {
 }
 
 const delete_user_by_username = async (req, res) => {
-    let username = req.body.username;
+    let {username} = req.body;
     let delete_user_success = await UserModel.destroy({
         where: {
             username: username
