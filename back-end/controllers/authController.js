@@ -167,10 +167,24 @@ const update_user_profile = async (req, res) => {
     }
 }
 
+const delete_user_by_username = async (req, res) => {
+    let username = req.body.username;
+    let delete_user_success = await UserModel.destroy({
+        where: {
+            username: username
+        }
+    })
+    if(!delete_user_success){
+        return res.status(400).json({message: "Failed to Delete", ok: false})
+    }
+    return res.status(200).json({message: "User deleted", ok: true})
+}
+
 module.exports = {
     login,
     logout,
     register,
     load_user_profile,
-    update_user_profile
+    update_user_profile,
+    delete_user_by_username
 }
